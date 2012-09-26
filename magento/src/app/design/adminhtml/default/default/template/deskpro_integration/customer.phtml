@@ -1,0 +1,97 @@
+<?php
+
+$customer = Mage::registry('current_customer');
+
+try {
+	/** @var $dp DeskPro_Integration_Model_Deskpro */
+	$dp = Mage::getModel('deskpro_integration/deskpro');
+	$people = $dp->getPeople($customer->getEmail());
+} catch (DpApiException $e) {
+	if ($e instanceof DpApiAuthException) {
+		echo $this->__('The DeskPRO API key was not correct.');
+	} else {
+		echo $this->__('Your DeskPRO installation could not be reached.');
+	}
+	return;
+}
+
+$statusMap = array(
+	'awaiting_user' => $this->__('Awaiting User'),
+	'awaiting_agent' => $this->__('Awaiting Agent'),
+	'closed' => $this->__('Archived'),
+	'hidden' => $this->__('Hidden'),
+	'resolved' => $this->__('Resolved')
+);
+
+if ($people) {
+?>
+	<div class="grid">
+	<table class="data" cellspacing="0">
+	<thead>
+		<tr class="headings">
+			<th><?php echo $this->__('Person Name'); ?></th>
+			<th><?php echo $this->__('Primary Email'); ?></th>
+			<th><?php echo $this->__('Organization'); ?></th>
+			<th><?php echo $this->__('Date Created'); ?></th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php
+	$i = 0;
+	foreach ($people AS $person) {
+?>
+		<tr class="<?php echo ($i++ % 2 ? 'odd': 'even'); ?>">
+			<td><a href="<?php echo $dp->getDeskProUrl() . "/agent/#app.people,p:$person[id]"; ?>" target="_blank"><?php echo $this->escapeHtml($person['name']); ?></a></td>
+			<td><?php echo $this->escapeHtml($person['primary_email']); ?></td>
+			<td><?php echo isset($person['organization']['name']) ? $this->escapeHtml($person['organization']['name']) : '&nbsp;'; ?></td>
+			<td><?php echo $person['date_created']; ?></td>
+		</tr>
+	<?php
+		try {
+			$tickets = $dp->getRecentTickets($person['id']);
+		} catch (DpApiException $e) {
+			$tickets = array();
+		}
+
+		if ($tickets) {
+		?>
+			<tr><td colspan="4" style="padding: 10px">
+				<table class="data" cellspacing="0">
+				<thead>
+				<tr class="headings">
+					<th><?php echo $this->__('Ticket Subject'); ?></th>
+					<th><?php echo $this->__('Department'); ?></th>
+					<th><?php echo $this->__('Date Created'); ?></th>
+					<th><?php echo $this->__('Status'); ?></th>
+				</tr>
+				</thead>
+				<tbody>
+		<?php
+			$j = 0;
+			foreach ($tickets AS $ticket) {
+		?>
+				<tr class="<?php echo ($j++ % 2 ? 'odd': 'even'); ?>">
+					<td><a href="<?php echo $dp->getDeskProUrl() . '/agent/#app.tickets,t:' . $ticket['id']; ?>" target="_blank"><?php echo $this->escapeHtml($ticket['subject']); ?></a></td>
+					<td><?php echo isset($ticket['department']['title']) ? $this->escapeHtml($ticket['department']['title']) : '&nbsp;'; ?></td>
+					<td><?php echo $ticket['date_created']; ?></td>
+					<td><?php echo isset($statusMap[$ticket['status']]) ? $statusMap[$ticket['status']] : '&nbsp;'; ?></td>
+				</tr>
+		<?php
+			}
+		?>
+				</tbody>
+				</table>
+			</td></tr>
+		<?php
+		}
+	}
+?>
+	</tbody>
+	</table>
+	</div>
+<?php
+} else {
+?>
+	<p><?php echo $this->__('There are no DeskPRO users with email %s.', $this->escapeHtml($customer->getEmail())); ?></p>
+<?php
+}

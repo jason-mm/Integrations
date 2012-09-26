@@ -1,0 +1,8 @@
+<config>
+	<modules>
+		<DeskPro_Integration>
+			<active>true</active>
+			<codePool>community</codePool>
+		</DeskPro_Integration>
+	</modules>
+</config>

@@ -1,0 +1,82 @@
+<config>
+	<modules>
+		<DeskPro_Integration>
+			<version>0.1.0</version>
+		</DeskPro_Integration>
+	</modules>
+
+	<global>
+		<blocks>
+			<deskpro_integration>
+				<class>DeskPro_Integration_Block</class>
+			</deskpro_integration>
+			<adminhtml>
+				<rewrite>
+					<customer_edit_tabs>DeskPro_Integration_Block_Adminhtml_Customer_Edit_Tabs</customer_edit_tabs>
+				</rewrite>
+			</adminhtml>
+		</blocks>
+		<models>
+			<deskpro_integration>
+				<class>DeskPro_Integration_Model</class>
+			</deskpro_integration>
+		</models>
+		<helpers>
+			<deskpro_integration>
+				<class>DeskPro_Integration_Helper</class>
+			</deskpro_integration>
+		</helpers>
+	</global>
+
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<DeskPro_Integration after="Mage_Adminhtml">DeskPro_Integration_Adminhtml</DeskPro_Integration>
+					</modules>
+				</args>
+			</adminhtml>
+		</routers>
+	</admin>
+
+	<adminhtml>
+		<acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <deskpro_integration_options>
+                                            <title>DeskPRO API Options</title>
+                                        </deskpro_integration_options>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+
+		<layout>
+			<updates>
+				<deskpro_integration>
+					<file>deskpro_integration.xml</file>
+				</deskpro_integration>
+			</updates>
+		</layout>
+
+		<translate>
+			<modules>
+				<deskpro_integration>
+					<files>
+						<default>DeskPro_Integration.csv</default>
+					</files>
+				</deskpro_integration>
+			</modules>
+		</translate>
+	</adminhtml>
+</config>

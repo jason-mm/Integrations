@@ -1,0 +1,7 @@
+<layout>
+	<adminhtml_deskpro_info>
+		<block type="core/text_list" name="root" output="toHtml">
+			<block type="deskpro_integration/customer_tab" name="adminhtml.deskpro.info"/>
+		</block>
+	</adminhtml_deskpro_info>
+</layout>
