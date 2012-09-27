@@ -3,6 +3,9 @@
 		<DeskPro_Integration>
 			<active>true</active>
 			<codePool>community</codePool>
+			<depends>
+				<Mage_Api />
+			</depends>
 		</DeskPro_Integration>
 	</modules>
 </config>

@@ -1,5 +1,5 @@
 <_>
-   <form_key>C1G6wK8DaZK8culR</form_key>
+   <form_key>3PcGzC65X8zZgicb</form_key>
    <name>DeskPRO_Integration</name>
    <channel>community</channel>
    <version_ids>
@@ -9,9 +9,9 @@
    <description>This extension allows you to display information from your DeskPRO helpdesk system in Magento. Displayed information currently includes DeskPRO users and tickets.</description>
    <license>BSD</license>
    <license_uri/>
-   <version>0.1.0</version>
-   <stability>alpha</stability>
-   <notes>Initial version integrating basic information from DeskPRO.</notes>
+   <version>0.2.0</version>
+   <stability>beta</stability>
+   <notes>Adds cross-domain single sign on support with DeskPRO (DeskPRO accounts sign on if logged into Magento).</notes>
    <authors>
       <name>
          <name>DeskPRO Ltd.</name>
@@ -40,7 +40,7 @@
             <max/>
          </max>
          <files>
-            <files>             </files>
+            <files>               </files>
          </files>
       </package>
       <extension>

@@ -8,7 +8,7 @@
  *  $api = new DpApi('http://example.com/deskpro', '1:APIKEYHERE');
  *
  * Then call whatever API method you want:
- *  $results = $api->findTickets();
+ *  $results = $api->findTickets(array());
  *
  * API methods will return false on failure. getLastErrors() can be called to get
  * more specific error messages.
@@ -54,6 +54,10 @@ class DpApi
 	 */
 	public function __construct($dp_root, $api_key)
 	{
+		if (!function_exists('curl_init')) {
+			throw new \Exception("cURL is not available. The DeskPRO API wrapper cannot be used.");
+		}
+
 		$this->setRoot($dp_root);
 		$this->setApiKey($api_key);
 	}

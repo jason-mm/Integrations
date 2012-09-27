@@ -1,7 +1,7 @@
 <config>
 	<modules>
 		<DeskPro_Integration>
-			<version>0.1.0</version>
+			<version>0.2.0</version>
 		</DeskPro_Integration>
 	</modules>
 
@@ -16,16 +16,36 @@
 				</rewrite>
 			</adminhtml>
 		</blocks>
+
 		<models>
 			<deskpro_integration>
 				<class>DeskPro_Integration_Model</class>
+				<resourceModel>deskpro_integration_resource</resourceModel>
 			</deskpro_integration>
+			<deskpro_integration_resource>
+				<class>DeskPro_Integration_Model_Resource</class>
+				<entities>
+					<loginkey>
+						<table>dp_loginkey</table>
+					</loginkey>
+				</entities>
+			</deskpro_integration_resource>
 		</models>
+
 		<helpers>
 			<deskpro_integration>
 				<class>DeskPro_Integration_Helper</class>
 			</deskpro_integration>
 		</helpers>
+
+		<resources>
+			<deskpro_integration_setup>
+				<setup>
+					<module>DeskPro_Integration</module>
+					<class>DeskPro_Integration_Model_Resource_Setup</class>
+				</setup>
+			</deskpro_integration_setup>
+		</resources>
 	</global>
 
 	<admin>
@@ -79,4 +99,17 @@
 			</modules>
 		</translate>
 	</adminhtml>
+
+	<frontend>
+		<routers>
+			<dpsso>
+				<use>standard</use>
+				<args>
+					<module>DeskPro_Integration_DpSso</module>
+					<frontName>dpsso</frontName>
+				</args>
+			</dpsso>
+		</routers>
+	</frontend>
+
 </config>

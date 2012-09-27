@@ -1,0 +1,29 @@
+<config>
+	<api>
+		<resources>
+			<dp_sso translate="title" module="deskpro_integration">
+				<title>GrelaDesign tutorial Core API calls</title>
+				<model>deskpro_integration/sso_api</model>
+				<acl>dp_sso/validate</acl>
+				<methods>
+					<validate translate="title" module="deskpro_integration">
+						<title>Returns version of this API</title>
+						<acl>dp_sso/validate</acl>
+					</validate>
+				</methods>
+			</dp_sso>
+		</resources>
+		<acl>
+			<resources>
+				<dp_sso translate="title" module="deskpro_integration">
+					<title>DeskPRO Single Sign On</title>
+					<sort_order>100</sort_order>
+					<validate translate="title" module="deskpro_integration">
+						<title>Access SSO Validation</title>
+						<sort_order>100</sort_order>
+					</validate>
+				</dp_sso>
+			</resources>
+		</acl>
+	</api>
+</config>
