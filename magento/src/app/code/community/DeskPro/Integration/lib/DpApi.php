@@ -1284,6 +1284,32 @@ class DpApi
 		$results = $this->call('GET', '/tickets/filters/' . intval($filter_id), $params);
 		return $this->_getResponse($results);
 	}
+
+	// ################### TICKET ACTIONS ####################
+
+	/**
+	 * Finds chats matching the criteria
+	 *
+	 * @param array $criteria
+	 * @param int $page Page number of results to retrieve - deafults to 1
+	 * @param null|string $order Order of results (if not specified, uses API default)
+	 * @param null|integer $cache Number of seconds to cache (if not specified, uses API default)
+	 *
+	 * @return array|bool
+	 */
+	public function findChats(array $criteria, $page = 1, $order = null, $cache = null)
+	{
+		$criteria['page'] = $page;
+		if ($order !== null) {
+			$criteria['order'] = $order;
+		}
+		if ($cache !== null) {
+			$criteria['cache'] = $cache;
+		}
+
+		$results = $this->call('GET', '/chats', $criteria);
+		return $this->_getResponse($results);
+	}
 }
 
 /**

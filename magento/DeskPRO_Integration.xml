@@ -1,5 +1,5 @@
 <_>
-   <form_key>3PcGzC65X8zZgicb</form_key>
+   <form_key>EZjm0udllUpvi0QZ</form_key>
    <name>DeskPRO_Integration</name>
    <channel>community</channel>
    <version_ids>
@@ -11,7 +11,9 @@
    <license_uri/>
    <version>0.2.0</version>
    <stability>beta</stability>
-   <notes>Adds cross-domain single sign on support with DeskPRO (DeskPRO accounts sign on if logged into Magento).</notes>
+   <notes>Adds cross-domain single sign on support with DeskPRO (DeskPRO accounts sign on if logged into Magento).
+
+Also retrieves a list of DeskPRO chats for a customer.</notes>
    <authors>
       <name>
          <name>DeskPRO Ltd.</name>
@@ -40,7 +42,7 @@
             <max/>
          </max>
          <files>
-            <files>               </files>
+            <files>                 </files>
          </files>
       </package>
       <extension>

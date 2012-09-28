@@ -40,4 +40,10 @@ class DeskPro_Integration_Model_Deskpro
 		$results = $this->getApi()->findTickets(array('person_id' => $personId), 1, 'ticket.date_created:desc');
 		return (!empty($results['tickets'])) ? array_slice($results['tickets'], 0, 10, true) : array();
 	}
+
+	public function getRecentChats($personId)
+	{
+		$results = $this->getApi()->findChats(array('person_id' => $personId));
+		return (!empty($results['chats'])) ? array_slice($results['chats'], 0, 10, true) : array();
+	}
 }

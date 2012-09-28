@@ -22,6 +22,10 @@ $statusMap = array(
 	'hidden' => $this->__('Hidden'),
 	'resolved' => $this->__('Resolved')
 );
+$chatStatusMap = array(
+	'open' => $this->__('Open'),
+	'ended' => $this->__('Ended')
+);
 
 if ($people) {
 ?>
@@ -53,10 +57,17 @@ if ($people) {
 			$tickets = array();
 		}
 
-		if ($tickets) {
+		try {
+			$chats = $dp->getRecentChats($person['id']);
+		} catch (DpApiException $e) {
+			$chats = array();
+		}
+
+		if ($tickets || $chats) {
 		?>
-			<tr><td colspan="4" style="padding: 10px">
-				<table class="data" cellspacing="0">
+			<tr><td colspan="4" style="padding: 5px 10px">
+		<?php if ($tickets) { ?>
+				<table class="data" cellspacing="0" style="margin: 5px 0">
 				<thead>
 				<tr class="headings">
 					<th><?php echo $this->__('Ticket Subject'); ?></th>
@@ -81,6 +92,36 @@ if ($people) {
 		?>
 				</tbody>
 				</table>
+		<?php
+			}
+			if ($chats) {
+		?>
+				<table class="data" cellspacing="0" style="margin: 5px 0">
+				<thead>
+				<tr class="headings">
+					<th><?php echo $this->__('Chat Subject'); ?></th>
+					<th><?php echo $this->__('Department'); ?></th>
+					<th><?php echo $this->__('Date Created'); ?></th>
+					<th><?php echo $this->__('Status'); ?></th>
+				</tr>
+				</thead>
+				<tbody>
+		<?php
+			$j = 0;
+			foreach ($chats AS $chat) {
+		?>
+					<tr class="<?php echo ($j++ % 2 ? 'odd': 'even'); ?>">
+						<td><a href="<?php echo $dp->getDeskProUrl() . '/agent/#app.userchat,c:' . $chat['id']; ?>" target="_blank"><?php echo $this->escapeHtml($chat['subject']); ?></a></td>
+						<td><?php echo isset($chat['department']['title']) ? $this->escapeHtml($chat['department']['title']) : '&nbsp;'; ?></td>
+						<td><?php echo $chat['date_created']; ?></td>
+						<td><?php echo isset($chatStatusMap[$chat['status']]) ? $chatStatusMap[$chat['status']] : '&nbsp;'; ?></td>
+					</tr>
+		<?php
+			}
+		?>
+				</tbody>
+				</table>
+			<?php }  ?>
 			</td></tr>
 		<?php
 		}
