@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="0.1" type="plugin" group="system">
+	<name>DeskPRO</name>
+	<author>DeskPRO</author>
+	<creationDate>August 2013</creationDate>
+	<copyright>Copyright (C) 2013 DeskPRO Ltd.</copyright>
+	<license>See https://www.deskpro.com/eula/</license>
+	<authorEmail>team@deskpro.com</authorEmail>
+	<authorUrl>www.deskpro.com</authorUrl>
+	<version>0.1</version>
+	<description>DeskPRO</description>
+	<files>
+		<filename plugin="deskpro">deskpro.php</filename>
+		<filename>index.html</filename>
+	</files>
+	<languages>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="dp_url" type="text"
+					default=""
+					description="The URL to your DeskPRO installation (without a trailing slash). You should include the /index.php part if you are not using URL rewriting. Examples: http://example.com/deskpro or http://deskpro.example.com/index.php"
+					label="DeskPRO URL"
+					size="100"
+				/>
+
+				<field name="dp_joomla_api_key" type="text"
+					default=""
+					description="A secret key used to sign communications between DeskPRO and this Joomla instance. This must be the same secret you entered into DeskPRO at Admin / Integrate / Joomla."
+					label="Joomla Secret Key"
+					size="100"
+				/>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
