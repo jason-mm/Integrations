@@ -268,6 +268,6 @@ class PlgSystemDeskpro extends JPlugin
 
 		$qs = http_build_query(array('DATA' => $params));
 
-		$app->setUserState('users.login.form.return', $this->dp_url . '/plugins/Joomla/run/init_session?' . $qs);
+		$app->setUserState('users.login.form.return', $this->dp_url . '/ext-plugins/Joomla/run/init_session?' . $qs);
 	}
 }
