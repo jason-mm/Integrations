@@ -234,40 +234,4 @@ class PlgSystemDeskpro extends JPlugin
 			exit;
 		}
 	}
-
-	public function onUserLogin($info, $options)
-	{
-		$this->last_login_info = $info;
-		$this->last_login_options = $options;
-
-		// Dont handle our own auth requests from above
-		if (isset($_GET['__dp_call'])) {
-			return;
-		}
-
-		$app = JFactory::getApplication();
-
-		if (empty($options['return']) && !empty($options['entry_url'])) {
-			$options['return'] = $options['entry_url'];
-		}
-
-		if (empty($options['return'])) {
-			$options['return'] = '';
-		}
-
-		$params = array(
-			'return'   => $options['return'],
-			'email'    => $info['email'],
-			'username' => $info['username'],
-			'fullname' => $info['fullname']
-		);
-
-		$time = time();
-		$params = base64_encode(json_encode($params));
-		$params = $time . '_' . sha1($time . $params . $this->joomla_secret) . '_' . $params;
-
-		$qs = http_build_query(array('DATA' => $params));
-
-		$app->setUserState('users.login.form.return', $this->dp_url . '/ext-plugins/Joomla/run/init_session?' . $qs);
-	}
 }
