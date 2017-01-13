@@ -234,4 +234,10 @@ class PlgSystemDeskpro extends JPlugin
 			exit;
 		}
 	}
+
+    public function onUserLogin($info, $options)
+    {
+        $this->last_login_info = $info;
+        $this->last_login_options = $options;
+    }
 }
