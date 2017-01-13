@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="0.1" type="plugin" group="system">
+<extension version="0.2" type="plugin" group="system">
 	<name>DeskPRO</name>
 	<author>DeskPRO</author>
 	<creationDate>August 2013</creationDate>
@@ -7,7 +7,7 @@
 	<license>See https://www.deskpro.com/eula/</license>
 	<authorEmail>team@deskpro.com</authorEmail>
 	<authorUrl>www.deskpro.com</authorUrl>
-	<version>0.1</version>
+	<version>0.2</version>
 	<description>DeskPRO</description>
 	<files>
 		<filename plugin="deskpro">deskpro.php</filename>
